@@ -1,0 +1,190 @@
+<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>UNIT I MCQ Test</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f2f2f2;margin:0;color:#111}
+header{background:white;padding:15px;text-align:center;position:sticky;top:0;z-index:5;border-bottom:1px solid #ddd}
+.box{max-width:850px;margin:25px auto;background:white;padding:25px;border-radius:15px}
+#q{font-size:22px;font-weight:bold;white-space:pre-line;margin-bottom:25px}
+.a{display:block;width:100%;padding:16px;margin:10px 0;border:2px solid #ddd;border-radius:10px;background:#fafafa;text-align:left;font-size:16px;cursor:pointer}
+.a.green{background:#d8f5e2;border-color:#198754}.a.red{background:#ffdfe2;border-color:#dc3545}.a.dim{opacity:.45}
+.a:disabled{cursor:default}
+#msg{display:none;padding:14px;margin-top:15px;border-radius:10px;font-weight:bold}
+#msg.g{display:block;background:#d8f5e2;color:#146c43}#msg.r{display:block;background:#ffdfe2;color:#a71d2a}
+.nav{display:flex;justify-content:space-between;margin-top:25px;gap:10px}
+.nav button{padding:12px 18px;border:0;border-radius:9px;background:#111;color:white;font-weight:bold;cursor:pointer}
+.nav button:disabled{opacity:.4;cursor:not-allowed}
+#finish{display:none;margin-top:25px}
+.score{padding:22px;border-radius:14px;background:#eef2ff;border:1px solid #cdd5ff}
+.result{border:1px solid #ddd;border-radius:12px;padding:16px;margin:12px 0;background:#fafafa}
+.result .picked{color:#b02a37}.result .correct{color:#146c43}
+</style></head><body>
+<header><b id="stats"></b></header>
+<div class="box">
+<div id="test">
+<div id="q"></div><div id="opts"></div><div id="msg"></div>
+<div class="nav"><button id="prev">← Previous</button><button id="next">Next →</button></div>
+</div>
+<div id="finish"></div>
+</div>
+<script>
+const source=[{"n": 1, "q": "Indian Traditional Knowledge is also referred to as:", "o": ["Indian Knowledge System", "Indigenous Knowledge System", "Independent Knowledge System", "Intellectual Knowledge System"], "a": 0}, {"n": 2, "q": "The term “Indian” in IKS refers to:", "o": ["The broader cultural-geographical region of the Indian subcontinent", "Only post-1947 India", "A political party", "Only North India"], "a": 0}, {"n": 3, "q": "Knowledge in the Indian tradition emerges through:", "o": ["Observation and experimentation", "Blind faith", "Guesswork", "Superstition"], "a": 0}, {"n": 4, "q": "The 14 Vidyasthanas were developed to:", "o": ["Organize and classify knowledge", "Promote foreign education", "Abolish traditional learning", "Establish trade routes"], "a": 0}, {"n": 5, "q": "Indian Traditional Knowledge exists in:", "o": ["Both oral and written forms", "Only written form", "Only oral form", "Only digital form"], "a": 0}, {"n": 6, "q": "Which of the following is part of the Literary Tradition?", "o": ["Vedic literature", "Folk storytelling", "Guru–Shishya Parampara", "Food habits"], "a": 0}, {"n": 7, "q": "Guru–Shishya Parampara belongs to:", "o": ["Non-Literary Tradition", "Modern Education System", "Literary Tradition", "Colonial Administration"], "a": 0}, {"n": 8, "q": "Ayurveda and Yoga are related to the domain of:", "o": ["Health and Medicine", "Governance", "Trade", "Defense"], "a": 0}, {"n": 9, "q": "Indian Traditional Knowledge promotes:", "o": ["Sustainable development", "Industrialisation", "Cultural erosion", "Nationalism"], "a": 0}, {"n": 10, "q": "IKS integrates Jnana, Vijnana, and:", "o": ["Jeevan Darshan", "Artha", "Kama", "Moksha"], "a": 0}, {"n": 11, "q": "One major importance of IKS is:", "o": ["Strengthening civilizational continuity", "Promoting superstition", "Promoting Westernisation of Indian Knowledge", "Strengthening Colonial Values"], "a": 0}, {"n": 12, "q": "Knowledge becomes a “system” when it is:", "o": ["Structured and logically arranged", "Randomly collected", "Politically controlled", "Ignored"], "a": 0}, {"n": 13, "q": "The Indian Knowledge System aligns with:", "o": ["Scientific inquiry with ethical foundations", "Skepticism", "Superstition only", "Colonial dominance"], "a": 0}, {"n": 14, "q": "Non-literary traditions are preserved through:", "o": ["Lived practices and performance", "Manuscripts only", "Foreign documentation", "Online platforms only"], "a": 0}, {"n": 15, "q": "The study of IKS aims to:", "o": ["Address contemporary challenges using traditional wisdom", "Promote nostalgia only", "Replace modern education completely", "Limit knowledge to religious texts"], "a": 0}, {"n": 16, "q": "Indian Knowledge System (IKS) is described as:", "o": ["A civilizational and multidisciplinary framework", "A purely religious framework", "A colonial academic model", "A modern technological invention"], "a": 0}, {"n": 17, "q": "IKS integrates which three core dimensions?", "o": ["Jnana, Vijnana, Jeevana Darshana", "Dharma, Artha, Kama", "Religion, Politics, Economy", "Theory, Practice, Trade"], "a": 0}, {"n": 18, "q": "The term “Darshana” means:", "o": ["Ritual practice", "Meditation technique", "A way of seeing", "Temple worship"], "a": 0}, {"n": 19, "q": "The six classical philosophical systems are collectively known as:", "o": ["Shad-Darshanas", "Vedangas", "Saptaprakriti", "Upavedas"], "a": 0}, {"n": 20, "q": "The Samkhya system proposes dualism between:", "o": ["Purusha and Prakriti", "Dharma and Karma", "Atman and Brahman", "Matter and Energy"], "a": 0}, {"n": 21, "q": "The Yoga system was systematized by:", "o": ["Patanjali", "Kapila", "Kanada", "Jaimini"], "a": 0}, {"n": 22, "q": "The Nyaya system is primarily associated with:", "o": ["Logic and reasoning", "Devotion", "Poetry", "Astronomy"], "a": 0}, {"n": 23, "q": "The Sulba Sutras are associated with:", "o": ["Geometry and altar construction", "Political science", "Ayurveda", "Music theory"], "a": 0}, {"n": 24, "q": "The medical tradition associated with surgical techniques is linked to:", "o": ["Sushruta", "Aryabhata", "Charaka", "Gautama"], "a": 0}, {"n": 25, "q": "The Iron Pillar of Delhi is an example of advanced:", "o": ["Metallurgy", "Temple art", "Literature", "Agriculture"], "a": 0}, {"n": 26, "q": "The Arthashastra discusses principles of:", "o": ["Administration and statecraft", "Surgery", "Commerce and Economics", "Ritual chanting"], "a": 0}, {"n": 27, "q": "Temple architecture in IKS required knowledge of:", "o": ["Geometry and engineering", "Only art", "Only sculpture", "Only religion"], "a": 0}, {"n": 28, "q": "Takshashila was established around:", "o": ["6th century BCE", "12th century CE", "5th century CE", "2nd century CE"], "a": 0}, {"n": 29, "q": "Takshashila was located in the present-day:", "o": ["Pakistan", "Nepal", "India", "Sri Lanka"], "a": 0}, {"n": 30, "q": "Takshashila functioned primarily as:", "o": ["A cluster of independent teachers", "A centralized university with fixed syllabus", "A monastery only", "A military academy only"], "a": 0}, {"n": 31, "q": "Which of the following scholars is associated with Takshashila?", "o": ["Panini", "Kumaragupta I", "Xuanzang", "Bakhtiyar Khilji"], "a": 0}, {"n": 32, "q": "Nalanda University was established in the:", "o": ["5th century CE", "6th century BCE", "8 th century CE", "10th century CE"], "a": 0}, {"n": 33, "q": "Nalanda was founded by:", "o": ["Kumaragupta I", "Harsha", "Ashoka", "Chandragupta Maurya"], "a": 0}, {"n": 34, "q": "Approximately how many students studied at Nalanda according to Chinese travelers?", "o": ["10,000", "1,000", "5,bs", "20,000"], "a": 0}, {"n": 35, "q": "Nalanda’s famous library was known as:", "o": ["Dharmaganja", "Ratnavali", "Arthashala", "Granthagriha"], "a": 0}, {"n": 36, "q": "Nalanda was destroyed in 1193 CE by:", "o": ["Bakhtiyar Khilji", "Mahmud of Ghazni", "Timur", "Aurangzeb"], "a": 0}, {"n": 37, "q": "The Gurukula system was characterized by:", "o": ["Residential learning with the teacher", "Distance learning", "Written examinations only", "Digital instruction"], "a": 0}, {"n": 38, "q": "In the Gurukula system, education emphasized:", "o": ["Moral, spiritual, and intellectual development", "Only vocational skills", "Only academic knowledge", "Military training alone"], "a": 0}, {"n": 39, "q": "Intellectual debates in traditional education promoted:", "o": ["Analytical thinking", "Blind acceptance", "Political propaganda", "Memorization only"], "a": 0}, {"n": 40, "q": "Ancient Indian education was described as:", "o": ["Dynamic, dialogical, and holistic", "Limited to religious teaching", "Static and dogmatic", "Restricted to elite groups only"], "a": 0}, {"n": 41, "q": "Indian culture is described as:", "o": ["An evolving system of beliefs, practices, and institutions", "A static set of rituals", "A modern political construct", "A foreign cultural import"], "a": 0}, {"n": 42, "q": "Culture includes which of the following elements?", "o": ["Both tangible and intangible aspects", "Only art and architecture", "Only religion", "Only social customs"], "a": 0}, {"n": 43, "q": "Which of the following is a tangible aspect of culture?", "o": ["Monuments", "Beliefs", "Ethical norms", "Social attitudes"], "a": 0}, {"n": 44, "q": "Which of the following is an intangible aspect of culture?", "o": ["Religious philosophies", "Coins", "Architecture", "Clothing"], "a": 0}, {"n": 45, "q": "The concept of “unity in diversity” reflects Indian culture’s:", "o": ["Pluralism", "Isolation", "Uniformity", "Rigidity"], "a": 0}, {"n": 46, "q": "The Indo-Greeks influenced Indian culture mainly through:", "o": ["Gandhara art", "Agriculture", "Printing technology", "Commerce and Economics"], "a": 0}, {"n": 47, "q": "The Taj Mahal represents a synthesis of:", "o": ["Persian and Indian styles", "Chinese and Indian styles", "British and Mughal styles", "Greek and Roman styles"], "a": 0}, {"n": 48, "q": "Maritime trade on India’s western coast connected it with:", "o": ["Mesopotamia and West Asia", "Europe only", "Japan", "South America"], "a": 0}, {"n": 49, "q": "The Chola expeditions facilitated cultural exchange with:", "o": ["Southeast Asia", "Africa", "China", "Europe"], "a": 0}, {"n": 50, "q": "British colonization introduced:", "o": ["Western education and modern institutions", "Only religious reforms", "Temple-based administration", "Vedic education"], "a": 0}, {"n": 51, "q": "Cultural nationalism emerged primarily as a response to:", "o": ["Colonial domination", "Mughal rule", "Natural disasters", "Trade expansion"], "a": 0}, {"n": 52, "q": "The Himalayas influenced Indian culture by:", "o": ["Shaping climate and providing protection", "Preventing all contact with other regions", "Promoting desert culture", "Eliminating trade routes"], "a": 0}, {"n": 53, "q": "The Indo-Gangetic plains supported:", "o": ["Agricultural prosperity and urbanization", "Mining economy", "Desert trade caravans", "Nomadic culture only"], "a": 0}, {"n": 54, "q": "The Vindhya-Satpura ranges contributed to:", "o": ["Development of Dravidian languages", "Isolation from trade", "Elimination of regional diversity", "Complete cultural uniformity"], "a": 0}, {"n": 55, "q": "Indian culture is best described as:", "o": ["Pluralistic, adaptive, and evolving", "Static and unchanging", "Limited to religious texts", "Homogeneous and rigid"], "a": 0}, {"n": 56, "q": "Historical sources used to reconstruct Indian culture are broadly classified into:", "o": ["Literary and Archaeological", "Religious and Secular", "Ancient and Modern", "Political and Economic"], "a": 0}, {"n": 57, "q": "Archaeology is particularly important for studying:", "o": ["Prehistory and protohistory", "Medieval trade only", "Colonial administration", "Modern India"], "a": 0}, {"n": 58, "q": "Prehistory refers to the period:", "o": ["Before the advent of writing", "During British rule", "During Gupta period", "After independence"], "a": 0}, {"n": 59, "q": "Protohistory refers to a period where:", "o": ["Writing existed but remains undeciphered", "No material remains exist", "Modern languages developed", "Foreign invasions began"], "a": 0}, {"n": 60, "q": "Which of the following is an example of archaeological evidence?", "o": ["Stone tools and microliths", "Tripitaka", "Arthashastra", "Upanishads"], "a": 0}, {"n": 61, "q": "The Indus Valley Civilization is dated approximately to:", "o": ["3000–1500 BCE", "1500–500 BCE", "600–300 BCE", "500–100 CE"], "a": 0}, {"n": 62, "q": "Which of the following Indus sites revealed advanced urban planning?", "o": ["Harappa", "Taxila", "Nalanda", "Pataliputra"], "a": 0}, {"n": 63, "q": "Rock paintings at Bhimbetka primarily depict:", "o": ["Hunting scenes and animals", "Royal ceremonies", "Temple rituals", "Foreign invasions"], "a": 0}, {"n": 64, "q": "Carbon-14 dating is used in archaeology to:", "o": ["Establish chronology", "Translate manuscripts", "Identify languages", "Interpret myths"], "a": 0}, {"n": 65, "q": "The four Vedas include all EXCEPT:", "o": ["Ayurveda", "Rigveda", "Samaveda", "Yajurveda"], "a": 0}, {"n": 66, "q": "The Tripitaka is associated with:", "o": ["Jainism", "Buddhism", "Hinduism", "Sikhism"], "a": 0}, {"n": 67, "q": "Rajatarangini provides historical information about:", "o": ["Kashmir", "Magadha", "Tamil Nadu", "Gujarat"], "a": 0}, {"n": 68, "q": "Foreign travellers who described India include:", "o": ["Xuanzang", "Ashoka", "Aryabhata", "Panini"], "a": 0}, {"n": 69, "q": "Agricultural festivals such as Pongal and Baisakhi reflect:", "o": ["Ecological awareness and community bonding", "Military victories", "Colonial reforms", "Industrialization"], "a": 0}, {"n": 70, "q": "A holistic understanding of Indian culture requires:", "o": ["Integration of archaeological, literary, and traditional sources", "Only an archaeological study", "Only literary analysis", "Only foreign accounts"], "a": 0}, {"n": 71, "q": "The Mature Harappan phase is generally dated to:", "o": ["2600–1900 BCE", "3300–2600 BCE", "7000–5000 BCE", "1500–1000 BCE"], "a": 0}, {"n": 72, "q": "The Harappan Civilization is also known as the:", "o": ["Indus–Saraswati Civilization", "Ganga Civilization", "Mauryan Civilization", "Vedic Civilization"], "a": 0}, {"n": 73, "q": "The Saraswati River is identified with the paleo-channel of the:", "o": ["Yamuna", "Ghaggar-Hakra", "Narmada", "Yamuna"], "a": 0}, {"n": 74, "q": "Harappan cities were divided into:", "o": ["Citadel and Lower Town", "Temple and Market", "Palace and Slums", "Port and Village"], "a": 0}, {"n": 75, "q": "A notable feature of Harappan houses was", "o": ["Private bathrooms with drainage outlets", "Lack of drainage", "Shared public bathrooms only", "Wooden construction only"], "a": 0}, {"n": 76, "q": "The Great Bath is located at:", "o": ["Mohenjo-daro", "Dholavira", "Lothal", "Harappa"], "a": 0}, {"n": 77, "q": "Dholavira is particularly famous for its:", "o": ["Water harvesting system", "Military fortifications", "Palace complex", "Pyramid structures"], "a": 0}, {"n": 78, "q": "Lothal is known as:", "o": ["One of the earliest dockyards", "A mining centre", "A religious capital", "A Vedic school"], "a": 0}, {"n": 79, "q": "In Mesopotamian texts, the Harappan region was referred to as:", "o": ["Meluha", "Aryavarta", "Indika", "Ikshvaku"], "a": 0}, {"n": 80, "q": "Harappan exports included all EXCEPT:", "o": ["Iron weapons", "Cotton textiles", "Beads", "Shell bangles"], "a": 0}, {"n": 81, "q": "The famous bronze “Dancing Girl” statue reflects Harappan skill in:", "o": ["Metallurgy", "Stone carving", "Textile weaving", "Painting"], "a": 0}, {"n": 82, "q": "The Indus script remains:", "o": ["Undeciphered", "Partially translated", "Fully deciphered", "Written in Sanskrit"], "a": 0}, {"n": 83, "q": "One major factor suggested for the decline of the Harappan Civilization is:", "o": ["Climate change and river shifts", "Nuclear warfare", "Immediate invasion", "Epidemic disease only"], "a": 0}, {"n": 84, "q": "The greatest contribution of the Harappan Civilization was:", "o": ["Scientific urban planning and sanitation", "Monumental pyramids", "Massive statues", "Military conquest"], "a": 0}, {"n": 85, "q": "The Harappan drainage system indicates awareness of:", "o": ["Public health and sanitation", "Military strategy", "Religious hierarchy", "Royal luxury"], "a": 0}, {"n": 86, "q": "The term “Purushartha” refers to:", "o": ["Goals of human life", "Social classes", "Political institutions", "Religious rituals only"], "a": 0}, {"n": 87, "q": "The four Purusharthas include all EXCEPT:", "o": ["Karma", "Artha", "Dharma", "Moksha"], "a": 0}, {"n": 88, "q": "Dharma primarily represents:", "o": ["Righteousness and duty", "Emotional desire", "Wealth accumulation", "Political conquest"], "a": 0}, {"n": 89, "q": "Artha in the Purushartha framework signifies:", "o": ["Material prosperity", "Liberation", "Ritual sacrifice", "Renunciation"], "a": 0}, {"n": 90, "q": "Moksha refers to:", "o": ["Liberation from worldly bonds", "Economic success", "Social mobility", "Political authority"], "a": 0}, {"n": 91, "q": "The Ashrama system divides life into:", "o": ["Four stages", "Three stages", "Five stages", "Two stages"], "a": 0}, {"n": 92, "q": "The first stage of life in Chaturashrama Dharma is:", "o": ["Brahmacharya", "Vanaprastha", "Sannyasa", "Grihastha"], "a": 0}, {"n": 93, "q": "Brahmacharya primarily focused on:", "o": ["Vedic study and discipline", "Warfare", "Trade", "Political administration"], "a": 0}, {"n": 94, "q": "The Grihastha stage was considered important because it:", "o": ["Supported other Ashramas economically", "Promoted renunciation", "Rejected social duties", "Avoided ritual practices"], "a": 0}, {"n": 95, "q": "Vanaprastha and Sannyasa stages encouraged:", "o": ["Spiritual reflection and detachment", "Material wealth", "Political expansion", "Military training"], "a": 0}, {"n": 96, "q": "The four Varnas include all EXCEPT:", "o": ["Nishada", "Kshatriya", "Vaishya", "Brahmana"], "a": 0}, {"n": 97, "q": "In early Vedic society, the Varna system was initially:", "o": ["Fluid and profession-based", "Completely rigid and hereditary", "Based only on wealth", "Determined by kings"], "a": 0}, {"n": 98, "q": "The Mahajanapadas emerged mainly during:", "o": ["Sixth to fourth centuries BCE", "Gupta period", "Harappan period", "Mughal period"], "a": 0}, {"n": 99, "q": "The Guru–Shishya tradition is closely linked to:", "o": ["Brahmacharya", "Sannyasa", "Vanaprastha", "Grihastha"], "a": 0}, {"n": 100, "q": "The combined effect of Purusharthas and Varnashrama Dharma ensured:", "o": ["Cultural discontinuity", "Ethical integration and knowledge preservation", "Political chaos", "Abolition of ritual traditions"], "a": 0}];
+
+// Shuffle questions ONCE. This creates one fixed random order for this test.
+// No question can repeat.
+const quiz=source.slice().sort(()=>Math.random()-0.5);
+
+// Shuffle options ONCE for each question.
+// The saved order never changes when moving backward/forward.
+const orders=quiz.map(()=>[0,1,2,3].sort(()=>Math.random()-0.5));
+
+// Saved answer for every question.
+// null = unanswered; 0-3 = original source option selected.
+const saved=new Array(quiz.length).fill(null);
+
+let cur=0,correct=0,wrong=0,locked=false;
+
+function render(){
+    const q=quiz[cur], order=orders[cur], selected=saved[cur];
+
+    document.getElementById("q").textContent=
+        "Question "+(cur+1)+" / 100\n\n"+q.q;
+
+    const box=document.getElementById("opts");
+    box.innerHTML="";
+
+    const msg=document.getElementById("msg");
+    msg.style.display="none";
+    msg.className="";
+
+    order.forEach((original,pos)=>{
+        const b=document.createElement("button");
+        b.className="a";
+        b.textContent=String.fromCharCode(65+pos)+". "+q.o[original];
+
+        if(selected!==null){
+            b.disabled=true;
+
+            // Show saved selected answer.
+            if(original===selected){
+                b.classList.add(selected===q.a ? "green" : "red");
+            }
+
+            // If saved answer was wrong, also show correct answer.
+            if(selected!==q.a && original===q.a){
+                b.classList.add("green");
+            }
+
+            if(original!==selected && !(selected!==q.a && original===q.a)){
+                b.classList.add("dim");
+            }
+        }else{
+            b.onclick=()=>choose(original);
+        }
+
+        box.appendChild(b);
+    });
+
+    if(selected!==null){
+        if(selected===q.a){
+            msg.className="g";
+            msg.textContent="✓ Correct! Your answer is saved.";
+        }else{
+            const cp=order.indexOf(q.a);
+            msg.className="r";
+            msg.textContent="✗ Wrong! Correct answer: "+
+                String.fromCharCode(65+cp)+". "+q.o[q.a]+
+                "  (Your answer is saved.)";
+        }
+        msg.style.display="block";
+    }
+
+    document.getElementById("stats").textContent=
+        "Question "+(cur+1)+" / 100   |   Correct: "+correct+
+        "   |   Wrong: "+wrong;
+
+    document.getElementById("prev").disabled=(cur===0);
+}
+
+function choose(original){
+    if(locked || saved[cur]!==null)return;
+
+    locked=true;
+    saved[cur]=original;
+
+    if(original===quiz[cur].a) correct++;
+    else wrong++;
+
+    render();
+
+    // Show result first, then automatically move forward.
+    setTimeout(()=>{
+        locked=false;
+        if(cur<quiz.length-1){
+            cur++;
+            render();
+            window.scrollTo(0,0);
+        }else{
+            showFinal();
+        }
+    },1200);
+}
+
+document.getElementById("next").onclick=function(){
+    if(locked)return;
+
+    if(cur<quiz.length-1){
+        cur++;
+        render();
+        window.scrollTo(0,0);
+    }else{
+        showFinal();
+    }
+};
+
+document.getElementById("prev").onclick=function(){
+    if(locked)return;
+
+    if(cur>0){
+        cur--;
+        render();
+        window.scrollTo(0,0);
+    }
+};
+
+function showFinal(){
+    document.getElementById("finish").style.display="block";
+
+    const percent=Math.round((correct/quiz.length)*100);
+
+    let html="<div class='score'><h2>🎉 Test Complete!</h2>"+
+        "<h2>"+percent+"% Correct</h2>"+
+        "<p>Correct: <b>"+correct+"</b> / 100</p>"+
+        "<p>Wrong: <b>"+wrong+"</b> / 100</p></div>";
+
+    if(wrong>0){
+        html+="<h2>❌ Questions You Got Wrong</h2>";
+
+        quiz.forEach((q,i)=>{
+            if(saved[i]!==null && saved[i]!==q.a){
+                const order=orders[i];
+                const pickedPos=order.indexOf(saved[i]);
+                const correctPos=order.indexOf(q.a);
+
+                html+="<div class='result'>"+
+                    "<b>Question "+(i+1)+":</b> "+q.q+
+                    "<p class='picked'><b>You picked:</b> "+
+                    String.fromCharCode(65+pickedPos)+". "+q.o[saved[i]]+"</p>"+
+                    "<p class='correct'><b>Correct answer:</b> "+
+                    String.fromCharCode(65+correctPos)+". "+q.o[q.a]+"</p>"+
+                    "</div>";
+            }
+        });
+    }else{
+        html+="<div class='result'><b>🔥 Perfect score! You got every question correct.</b></div>";
+    }
+
+    document.getElementById("finish").innerHTML=html;
+    document.getElementById("finish").scrollIntoView({behavior:"smooth"});
+}
+
+render();
+</script></body></html>
